@@ -1,5 +1,7 @@
 {
   "name": "blinduinoApp",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
