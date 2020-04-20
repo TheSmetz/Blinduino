@@ -99,4 +99,11 @@
     <plugin name="cordova-plugin-splashscreen" spec="5.0.2" />
     <plugin name="cordova-plugin-ionic-webview" spec="^4.0.0" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
+    <edit-config file="*-Info.plist" mode="merge" target="NSCameraUsageDescription">
+        <string>your usage message </string>
+    </edit-config>
+    <plugin name="cordova-plugin-camera" spec="^4.0.2">
+        <variable name="CAMERA_USAGE_DESCRIPTION" value="Use Camera" />
+        <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="Select Photo" />
+    </plugin>
 </widget>

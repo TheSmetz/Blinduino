@@ -9,6 +9,7 @@ import { Router, NavigationExtras } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 
 import { TextToSpeech } from '@ionic-native/text-to-speech/ngx';
+import { HttpParams } from '@angular/common/http';
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -16,20 +17,19 @@ import { TextToSpeech } from '@ionic-native/text-to-speech/ngx';
 })
 export class Tab2Page {
 
-  selectedfeature:"LABEL_DETECTION"
+  // selectedfeature:"LABEL_DETECTION"
 
   constructor(
     private camera: Camera,
     public actionSheetController: ActionSheetController,
-    private _DomSanitizer: DomSanitizer,
+    // private _DomSanitizer: DomSanitizer,
     private vision: GoogleCloudVisionServiceService,
-    private route : Router,
+    private route: Router,
     public loadingController: LoadingController,
     private tts: TextToSpeech,
   ) { }
 
-  
-  async takePhoto(){
+  async takePhoto() {
     const options: CameraOptions = {
       quality: 100,
       targetHeight: 500,
@@ -38,62 +38,51 @@ export class Tab2Page {
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
       sourceType: 1
-    }
+    };
 
-    this.camera.getPicture(options).then(async (imageData) => {
-     
-
+    this.camera.getPicture(options).then(async (imageData: string ) => {
+   
       const loading = await this.loadingController.create({
         message: 'Getting Results...',
         translucent: true
         });
+      await loading.present();
 
-        await loading.present();
 
-        this.vision.getLabels(imageData,this.selectedfeature).subscribe(async (result) => {
-          console.log(result.toString())
-          let navigationExtras: NavigationExtras = {
-          queryParams: {
-          special: JSON.stringify(imageData),
-          result : JSON.stringify(result.toString()),
-          feature : JSON.stringify(this.selectedfeature)
-          }};
-     this.route.navigate(["showclass"],navigationExtras)
-     await loading.dismiss()
+      const data = {image: imageData};
+      const str = JSON.stringify(data)
+
+    
+      // tslint:disable-next-line: no-shadowed-variable
+      const result = this.vision.getLabels(str).subscribe(async ( result: string ) => {
+        console.log(result)
+        this.tts.speak(result.toString())
+        .then(() => console.log('Success'))
+        .catch((reason: any) => console.log(reason));
+
+         loading.dismiss();
+  }, err => {
+    console.log(err);
+    });
     }, err => {
-      console.log(err);
-      });
-      }, err => {
-      console.log(err);
-      });
-      }
-     
-     
-      radioGroupChange(event)
-    {
-        this.selectedfeature = event.detail;
+    console.log(err);
+    });
     }
 
-    textToSpeech(){
+    textToSpeech() {
       this.tts.speak('Take a photo')
       .then(() => console.log('Success'))
      .catch((reason: any) => console.log(reason));
     }
- 
 
-  dataURItoBlob(dataURI: string) {
-    const byteString = window.atob(dataURI);
-    const arrayBuffer = new ArrayBuffer(byteString.length);
-    const int8Array = new Uint8Array(arrayBuffer);
-    for (let i = 0; i < byteString.length; i++) {
-      int8Array[i] = byteString.charCodeAt(i);
-    }
-    const blob = new Blob([int8Array], { type: 'image/jpeg' });    
-    return blob;
- }
+  //   dataURItoBlob(dataURI: string) {
+  //     const byteString = window.atob(dataURI);
+  //     const arrayBuffer = new ArrayBuffer(byteString.length);
+  //     const int8Array = new Uint8Array(arrayBuffer);
+  //     for (let i = 0; i < byteString.length; i++) {
+  //       int8Array[i] = byteString.charCodeAt(i);
+  //     }
+  //     const blob = new Blob([int8Array], { type: 'image/jpeg' });
+  //     return blob;
+  //  }
 }
-  
-
-
-  
-

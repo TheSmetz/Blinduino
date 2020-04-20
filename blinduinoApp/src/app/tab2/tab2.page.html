@@ -35,52 +35,6 @@
 </ion-header>
 <ion-content>
   <ion-item><h5> Select any one feature to be applied:</h5></ion-item>
-  <ion-radio-group (ionChange)="radioGroupChange($event)">
-      <ion-item>
-          <ion-label>Object Detection</ion-label>
-          <ion-radio value="OBJECT_LOCALIZATION checked" ></ion-radio>
-      </ion-item>
-      <ion-item>
-          <ion-label>Web Detection</ion-label>
-          <ion-radio value="WEB_DETECTION" ></ion-radio>
-      </ion-item>
-      <ion-item>
-          <ion-label>Landmark Detection</ion-label>
-          <ion-radio value="LANDMARK_DETECTION"></ion-radio>
-      </ion-item>
-      <ion-item>
-        <ion-label>Label Detection</ion-label>
-        <ion-radio value="LABEL_DETECTION" ></ion-radio>
-      </ion-item>
-      <ion-item>
-        <ion-label>Text Detection</ion-label>
-        <ion-radio value="TEXT_DETECTION"></ion-radio>
-      </ion-item>
-      <ion-item>
-          <ion-label>Logo Detection</ion-label>
-          <ion-radio value="LOGO_DETECTION" ></ion-radio>
-      </ion-item>
-      <ion-item>
-        <ion-label>Face Detection</ion-label>
-        <ion-radio value="FACE_DETECTION" ></ion-radio>
-      </ion-item>
-      <ion-item>
-        <ion-label>Safe Search Detection</ion-label>
-        <ion-radio value="SAFE_SEARCH_DETECTION" ></ion-radio>
-      </ion-item>
-      <ion-item>
-        <ion-label>Image Properties</ion-label>
-        <ion-radio value="IMAGE_PROPERTIES" ></ion-radio>
-      </ion-item>
-      <ion-item>
-        <ion-label>Crop Hints</ion-label>
-        <ion-radio value="CROP_HINTS"></ion-radio>
-      </ion-item>
-      <ion-item>
-        <ion-label>Document Text Detection</ion-label>
-        <ion-radio value="DOCUMENT_TEXT_DETECTION" ></ion-radio>
-      </ion-item>
-  </ion-radio-group>
   <ion-fab vertical="bottom" horizontal="left" slot="fixed">
       <ion-fab-button (click)="takePhoto()">
         <ion-icon name="camera">
