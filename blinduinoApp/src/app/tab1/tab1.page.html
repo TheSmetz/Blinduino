@@ -15,15 +15,15 @@
 
   
 
-  <ion-card >
+  <ion-card (click)="getSpeechFoot()" >
     <ion-title size="large">Foot Sensor</ion-title>
     <h1 >{{ randomFoot }}</h1>
   </ion-card>
-  <ion-card >
+  <ion-card  (click)=getHandSensor()>
     <ion-title size="large">Hand Sensor</ion-title>
     <h1>{{ randomHand }}</h1>
   </ion-card>
-  <ion-card >
+  <ion-card>
     <ion-title size="large">Head Sensor</ion-title>
     <h1>{{ randomHead }}</h1>
   </ion-card>

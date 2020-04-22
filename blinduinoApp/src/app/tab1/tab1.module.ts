@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Tab1Page } from './tab1.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
-
+import { TextToSpeech } from '@ionic-native/text-to-speech/ngx';
 @NgModule({
   imports: [
     IonicModule,
@@ -14,6 +14,9 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
     ExploreContainerComponentModule,
     RouterModule.forChild([{ path: '', component: Tab1Page }])
   ],
+  providers: [
+    TextToSpeech,
+    ],
   declarations: [Tab1Page]
 })
 export class Tab1PageModule {}
