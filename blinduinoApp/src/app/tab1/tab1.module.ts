@@ -6,6 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { Tab1Page } from './tab1.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 import { TextToSpeech } from '@ionic-native/text-to-speech/ngx';
+import { DomSanitizer} from '@angular/platform-browser';
+
 @NgModule({
   imports: [
     IonicModule,
