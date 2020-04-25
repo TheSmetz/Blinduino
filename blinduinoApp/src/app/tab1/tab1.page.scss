@@ -1,18 +1,23 @@
 ion-content ion-toolbar {
   --background: translucent;
 }
-
+.ion-content{
+  background-color: black;
+}
 
 ion-card{
-  height: 30%;
+  height: 25%;
   background-color: white;
 }
 
-
 ion-title {
   text-align: center;
-  color: black;
+  color: white;
   //font-size: 30px;
+}
+.ion-card-title{
+  text-align: center;
+  color: black;
 }
 
 .action {

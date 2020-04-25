@@ -1,31 +1,24 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>     
-      Obstacle Detection
+      Obstacle Recognition
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Obastacle Recognition</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  
-  <ion-card [style.background-color]="colorHead" >
-    <ion-title size="large">Head Sensor</ion-title>
+  <ion-card [style.background-color]="colorHead" (click)="getDistanceHead()"  >
+    <ion-card-title size="large">Head Sensor</ion-card-title>
     <h1>{{ randomHead }}</h1>
   </ion-card>
  
   <ion-card   [style.background-color]="colorHand" (click)=getHandSensor()>
-    <ion-title size="large">Hand Sensor</ion-title>
+    <ion-card-title size="large">Hand Sensor</ion-card-title>
     <h1>{{ randomHand }}</h1>
   </ion-card>
  
   <ion-card [style.background-color]="colorFoot" (click)="getDistanceFoot()" >
-    <ion-title size="large">Foot Sensor</ion-title>
+    <ion-card-title size="large">Foot Sensor</ion-card-title>
     <h1 >{{ randomFoot }}</h1>
   </ion-card>
   
