@@ -1,25 +1,32 @@
-import { Component } from '@angular/core';
+import { Component,  AfterViewInit } from '@angular/core';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-import { File } from '@ionic-native/file/ngx';
 import { ActionSheetController } from '@ionic/angular';
-import { DomSanitizer } from '@angular/platform-browser';
-import { WebView } from '@ionic-native/ionic-webview/ngx'
 import { GoogleCloudVisionServiceService } from '../../service/google-cloud-vision-service.service';
-import { Router, NavigationExtras } from '@angular/router';
+import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 
 import { TextToSpeech } from '@ionic-native/text-to-speech/ngx';
 import { HttpParams } from '@angular/common/http';
+import { SuperTabs } from '@ionic-super-tabs/angular';
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss']
 })
-export class Tab2Page {
+export class Tab2Page implements AfterViewInit {
 
   // selectedfeature:"LABEL_DETECTION"
+  ngAfterViewInit() {
+    console.log("ciaoooo")
+  }
+  ionViewDidEnter(){
+    console.log("page 2")
+  }
+
+  
 
   constructor(
+    private st: SuperTabs,
     private camera: Camera,
     public actionSheetController: ActionSheetController,
     // private _DomSanitizer: DomSanitizer,
@@ -28,8 +35,20 @@ export class Tab2Page {
     public loadingController: LoadingController,
     private tts: TextToSpeech,
   ) { }
+ 
 
+  //  ngOnInit() {
+  //   this.tts.speak('click center screen');
+  //   console.log("I'm alive!");
+  //  }
+   ionViewDidLeave(){
+    this.tts.speak('click center screen');
+    console.log("I'm alive!");
+   }
+  
+  
   async takePhoto() {
+    this.tts.speak('Camera activated');
     const options: CameraOptions = {
       quality: 100,
       targetHeight: 500,
@@ -41,7 +60,7 @@ export class Tab2Page {
     };
 
     this.camera.getPicture(options).then(async (imageData: string ) => {
-   
+      this.tts.speak('Getting Results');
       const loading = await this.loadingController.create({
         message: 'Getting Results...',
         translucent: true
@@ -51,8 +70,7 @@ export class Tab2Page {
 
       const data = {image: imageData};
       const str = JSON.stringify(data)
-
-    
+      
       // tslint:disable-next-line: no-shadowed-variable
       const result = this.vision.getLabels(str).subscribe(async ( result: string ) => {
         console.log(result)
@@ -75,14 +93,4 @@ export class Tab2Page {
      .catch((reason: any) => console.log(reason));
     }
 
-  //   dataURItoBlob(dataURI: string) {
-  //     const byteString = window.atob(dataURI);
-  //     const arrayBuffer = new ArrayBuffer(byteString.length);
-  //     const int8Array = new Uint8Array(arrayBuffer);
-  //     for (let i = 0; i < byteString.length; i++) {
-  //       int8Array[i] = byteString.charCodeAt(i);
-  //     }
-  //     const blob = new Blob([int8Array], { type: 'image/jpeg' });
-  //     return blob;
-  //  }
 }

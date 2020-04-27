@@ -1,3 +1,17 @@
 ion-content ion-toolbar {
   --background: translucent;
 }
+
+.ion-fab{
+  
+  width: 100%;
+}
+
+ion-title {
+  text-align: center;
+  color: white;
+  //font-size: 30px;
+}
+.ion-content{
+  background-color: black;
+}

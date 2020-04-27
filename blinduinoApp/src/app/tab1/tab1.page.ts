@@ -13,7 +13,7 @@ import { DomSanitizer} from '@angular/platform-browser';
 export class Tab1Page implements OnInit {
 
   randomFoot;
-  randomHand;
+  randomHand: number;
   randomHead;
   colorFoot;
   colorHead;
@@ -21,6 +21,9 @@ export class Tab1Page implements OnInit {
   time;
   clicked = false;
   clickedFoot=false;
+  clickedHead=false;
+  timeHand;
+  timeFoot;
   
   // tslint:disable-next-line: variable-name
   constructor(private tts_service: SpeechService,
@@ -29,8 +32,7 @@ export class Tab1Page implements OnInit {
 // tslint:disable-next-line: use-lifecycle-interface
 ngOnInit() {
   // tslint:disable-next-line: deprecation
-  this.time = setInterval(() => {this.getRandom(),
-    console.log(this.randomHead);},2000)
+  this.time = setInterval(() => {this.getRandom()},6000)
   
 }
   getRandom() {
@@ -42,37 +44,40 @@ ngOnInit() {
 
 
   getHandSensor() {
+   
+    console.log('HAAAAAAANNNNDDDD')
     if(!this.clicked){
       this.clicked=true;
-      this.tts_service.textToSpeech('head Sensor');
-      this.time = setInterval(() => {
-        this.randomHand = Math.round((( Math.random() * 4) + Number.EPSILON) * 100) / 100;
-        this.tts_service.textToSpeech(this.randomHead);
-        this.colorHand=this.getColor(this.randomHand);
-        console.log(this.randomHead) 
-      }, 2000);
-    }else{
-     clearInterval(this.time)
+      this.tts_service.textToSpeech('Hand Sensor');
+      this.timeHand = setInterval(() => {
+        console.log('HAAAAAAANNNNDDDD')
+        if(!this.clickedFoot && !this.clickedHead){
+          this.randomHand = Math.round((( Math.random() * 4) + Number.EPSILON) * 100) / 100;
+          this.tts_service.textToSpeech(this.randomHand.toString());
+          this.colorHand=this.getColor(this.randomHand);
+        }}, 6000);
+        } 
+    else{
+     clearInterval(this.timeHand)
       this.clicked=false;
       this.colorHand = "white";
     }
   }
 
-
-  getDistanceFoot(){
-    if(!this.clickedFoot){
-      this.clickedFoot=true;
-      this.tts_service.textToSpeech('Foot Sensor');
-      this.time = setInterval(() => {
-        this.randomHand = Math.round((( Math.random() * 4) + Number.EPSILON) * 100) / 100;
-        this.tts_service.textToSpeech(this.randomHead);
-        this.colorHand=this.getColor(this.randomHand);
-      }, 2000);
-    }else{
-     clearInterval(this.time)
+ async  getDistanceFoot(){
+    console.log("FOOOOOOT")
+    this.clickedFoot=true;
+      await this.tts_service.textToSpeech('Foot Sensor');
+     await  this.tts_service.textToSpeech(this.randomFoot);
       this.clickedFoot=false;
-    }
   }
+
+  getDistanceHead(){
+    this.clickedHead=true;
+    this.tts_service.textToSpeech('Head Sensor');
+    this.tts_service.textToSpeech(this.randomHead);
+    this.clickedHead=false;
+}
 
   getColor(num){
     if(num>=1.00){

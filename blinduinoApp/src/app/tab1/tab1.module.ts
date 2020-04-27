@@ -7,10 +7,12 @@ import { Tab1Page } from './tab1.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 import { TextToSpeech } from '@ionic-native/text-to-speech/ngx';
 import { DomSanitizer} from '@angular/platform-browser';
+import { SuperTabsModule } from '@ionic-super-tabs/angular';
 
 @NgModule({
   imports: [
     IonicModule,
+    
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
@@ -19,6 +21,7 @@ import { DomSanitizer} from '@angular/platform-browser';
   providers: [
     TextToSpeech,
     ],
-  declarations: [Tab1Page]
+  declarations: [Tab1Page],
+  entryComponents:[Tab1Page],
 })
 export class Tab1PageModule {}

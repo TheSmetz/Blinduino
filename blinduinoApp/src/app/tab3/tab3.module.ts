@@ -14,6 +14,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
     ExploreContainerComponentModule,
     RouterModule.forChild([{ path: '', component: Tab3Page }])
   ],
-  declarations: [Tab3Page]
+  declarations: [Tab3Page],
+  entryComponents:[Tab3Page],
 })
 export class Tab3PageModule {}

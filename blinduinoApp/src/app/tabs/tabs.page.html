@@ -1,20 +1,83 @@
-<ion-tabs>
+<!-- <ion-tabs>
 
-  <ion-tab-bar slot="bottom">
+   <ion-tab-bar slot="bottom">
     <ion-tab-button tab="tab1">
-      <ion-icon name="triangle"></ion-icon>
-      <ion-label>Obastacle Recognition</ion-label>
+      <ion-icon name="walk-outline"></ion-icon>
+      <ion-label>Obstacle Recognition</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="tab2">
-      <ion-icon name="ellipse"></ion-icon>
+      <ion-icon name="camera-outline"></ion-icon>
       <ion-label>Camera Recognition</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="tab3">
-      <ion-icon name="square"></ion-icon>
+      <ion-icon name="information-outline"></ion-icon>
       <ion-label>Info</ion-label>
     </ion-tab-button>
-  </ion-tab-bar>
+  </ion-tab-bar> 
+ 
+</ion-tabs>  -->
+<!-- 
+<super-tabs>
+<super-tabs-toolbar slot="bottom">
+  <super-tab-button tab="Tab1Page">
+  
+  </super-tab-button>
+  <super-tab-button tab="tab2">
+    
+  </super-tab-button>
+  <super-tab-button tab="tab3">
+    
+  </super-tab-button>
+</super-tabs-toolbar>  -->
+<!-- </super-tabs> -->
+<!-- <ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>Blinduino</ion-title>
+  </ion-toolbar>
+</ion-header> -->
 
-</ion-tabs>
+<super-tabs>
+  <super-tabs-toolbar slot="bottom" >
+    <super-tab-button tab="tab1">
+      <ion-icon name="walk-outline"></ion-icon>
+      <ion-label>Obstacle</ion-label> 
+      
+    </super-tab-button>
+    <super-tab-button tab="tab2">
+     
+      <ion-icon name="camera-outline"></ion-icon>
+      <ion-label>Camera</ion-label>  
+      
+    </super-tab-button>
+    <super-tab-button tab="tab3">
+      
+      <ion-icon name="information-outline"></ion-icon>
+      <ion-label>Info</ion-label> 
+    </super-tab-button>
+  </super-tabs-toolbar>
+  <super-tabs-container>
+    <super-tab>
+      <ion-content>
+        <super-tab>
+          <ion-nav [root]="tab1" ></ion-nav>
+        </super-tab>
+      </ion-content>
+    </super-tab>
+    <super-tab>
+      <ion-content>
+        <super-tab>
+          <ion-nav [root]="tab2" ></ion-nav>
+        </super-tab>
+      </ion-content>
+    </super-tab>
+    <super-tab>
+      <ion-content>
+        <super-tab>
+          <ion-nav [root]="tab3" ></ion-nav>
+        </super-tab>
+      </ion-content>
+    </super-tab>
+  </super-tabs-container>
+</super-tabs>

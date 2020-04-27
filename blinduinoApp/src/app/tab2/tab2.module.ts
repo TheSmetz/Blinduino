@@ -35,6 +35,7 @@ import { WebView } from '@ionic-native/ionic-webview/ngx'
     
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
     ],
-  declarations: [Tab2Page]
+  declarations: [Tab2Page],
+  entryComponents:[Tab2Page],
 })
 export class Tab2PageModule {}
