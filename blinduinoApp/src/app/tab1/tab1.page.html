@@ -8,18 +8,18 @@
 
 <ion-content [fullscreen]="true">
   <ion-card [style.background-color]="colorHead" (click)="getDistanceHead()"  >
-    <ion-card-title size="large">Head Sensor</ion-card-title>
-    <h1>{{ randomHead }}</h1>
+    <ion-card-title class="title" size="large">Head Sensor</ion-card-title>
+    <h1 class="font">{{ randomHead }}</h1>
   </ion-card>
  
   <ion-card   [style.background-color]="colorHand" (click)=getHandSensor()>
-    <ion-card-title size="large">Hand Sensor</ion-card-title>
-    <h1>{{ randomHand }}</h1>
+    <ion-card-title class="title" size="large">Hand Sensor</ion-card-title>
+    <h1 class="font">{{ randomHand }}</h1>
   </ion-card>
  
   <ion-card [style.background-color]="colorFoot" (click)="getDistanceFoot()" >
-    <ion-card-title size="large">Foot Sensor</ion-card-title>
-    <h1 >{{ randomFoot }}</h1>
+    <ion-card-title class="title" size="large">Foot Sensor</ion-card-title>
+    <h1 class="font">{{ randomFoot }}</h1>
   </ion-card>
   
   

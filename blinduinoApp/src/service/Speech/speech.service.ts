@@ -9,8 +9,8 @@ export class SpeechService {
 
   constructor(private tts: TextToSpeech) { }
 
-  textToSpeech(words: string) {
-    this.tts.speak(words)
+ async  textToSpeech(words: string) {
+   await  this.tts.speak(words)
     .then(() => console.log('Success'))
    .catch((reason: any) => console.log(reason));
   

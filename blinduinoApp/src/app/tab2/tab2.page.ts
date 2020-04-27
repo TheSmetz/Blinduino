@@ -1,4 +1,4 @@
-import { Component,  AfterViewInit } from '@angular/core';
+import { Component,  AfterViewInit, OnInit } from '@angular/core';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { ActionSheetController } from '@ionic/angular';
 import { GoogleCloudVisionServiceService } from '../../service/google-cloud-vision-service.service';
@@ -13,17 +13,9 @@ import { SuperTabs } from '@ionic-super-tabs/angular';
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss']
 })
-export class Tab2Page implements AfterViewInit {
+export class Tab2Page   {
 
-  // selectedfeature:"LABEL_DETECTION"
-  ngAfterViewInit() {
-    console.log("ciaoooo")
-  }
-  ionViewDidEnter(){
-    console.log("page 2")
-  }
 
-  
 
   constructor(
     private st: SuperTabs,
@@ -35,17 +27,7 @@ export class Tab2Page implements AfterViewInit {
     public loadingController: LoadingController,
     private tts: TextToSpeech,
   ) { }
- 
 
-  //  ngOnInit() {
-  //   this.tts.speak('click center screen');
-  //   console.log("I'm alive!");
-  //  }
-   ionViewDidLeave(){
-    this.tts.speak('click center screen');
-    console.log("I'm alive!");
-   }
-  
   
   async takePhoto() {
     this.tts.speak('Camera activated');
