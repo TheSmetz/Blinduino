@@ -5,7 +5,7 @@ import { GoogleCloudVisionServiceService } from '../../service/google-cloud-visi
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 
-import { TextToSpeech } from '@ionic-native/text-to-speech/ngx';
+import { SpeechService } from '../../service/Speech/speech.service';
 import { HttpParams } from '@angular/common/http';
 import { SuperTabs } from '@ionic-super-tabs/angular';
 @Component({
@@ -25,12 +25,12 @@ export class Tab2Page   {
     private vision: GoogleCloudVisionServiceService,
     private route: Router,
     public loadingController: LoadingController,
-    private tts: TextToSpeech,
+    private tts: SpeechService,
   ) { }
 
   
   async takePhoto() {
-    this.tts.speak('Camera activated');
+    this.tts.textToSpeech('Camera activated');
     const options: CameraOptions = {
       quality: 100,
       targetHeight: 500,
@@ -42,7 +42,7 @@ export class Tab2Page   {
     };
 
     this.camera.getPicture(options).then(async (imageData: string ) => {
-      this.tts.speak('Getting Results');
+      this.tts.textToSpeech('Getting Results');
       const loading = await this.loadingController.create({
         message: 'Getting Results...',
         translucent: true
@@ -56,7 +56,7 @@ export class Tab2Page   {
       // tslint:disable-next-line: no-shadowed-variable
       const result = this.vision.getLabels(str).subscribe(async ( result: string ) => {
         console.log(result)
-        this.tts.speak(result.toString())
+        this.tts.textToSpeech(result.toString())
         .then(() => console.log('Success'))
         .catch((reason: any) => console.log(reason));
 
@@ -70,7 +70,7 @@ export class Tab2Page   {
     }
 
     textToSpeech() {
-      this.tts.speak('Take a photo')
+      this.tts.textToSpeech('Take a photo')
       .then(() => console.log('Success'))
      .catch((reason: any) => console.log(reason));
     }
