@@ -3,7 +3,7 @@
  * to the Smartphone. In the special case of the HC-05 the default PinCode for initiating 
  * the Coupling-Process is "1234".
  * IMPORTANT: The complete StringBluetooth has to be of the Form: state,distance; state,state,distance,distance,distance;
- * es: 1,0.5,0.6,0.7,0,1,0.4,0.3,0.2....
+ * es: 1;0.5,0.6,0.7,0,1,0.4,0.3,0.2....
  * (every Value has to be seperated through a comma (',') and the message has to end with a semicolon (';')) */
 
 #define buttonIn 7                    //Switch Pin
@@ -45,7 +45,9 @@ void loop()
     if (digitalRead(buttonIn) == HIGH)  //Control the button HIGH or LOW
     {
         state = !state;                                       //Change state of Button in ON or OFF
+        BTserial.print("State:");                             //Separator
         BTserial.print(state);                                //Print the state of the vibrator
+        BTserial.print(";");                                  //Separator
         delay(500);                                           //Delay to use the button
     }
     if (state)    //Control the state
@@ -55,6 +57,7 @@ void loop()
         digitalWrite(distanceMeterTrigger, LOW);              //Receive pulse
         timeMeasure = pulseIn(distanceMeterEcho, HIGH);       //Save the pulse
         distanceMeasure = 0.03434 * timeMeasure / 2;          //Convert the pulse in cm
+        BTserial.print("Distance:");                          //Separator
         BTserial.print(distanceMeasure);                      //Send to App measure of distance
         BTserial.print(",");                                  //Separator
         if (distanceMeasure < maxDistance)                    //Control range of distance
@@ -64,6 +67,5 @@ void loop()
             digitalWrite(vibrationOut, LOW);                  //Deactivate Vibration 
             delay(timeMeasure / 20);                          //Set up the time of Vibration based on timeMeasure (avoid 3 If cycles)
         }
-        BTserial.print(";");                                  //Separator
     }
 }
