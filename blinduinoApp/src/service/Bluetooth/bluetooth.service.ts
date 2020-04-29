@@ -10,6 +10,11 @@ export class BluetoothService {
   constructor(private ble: BLE) { }
 
   device = [];
+
+  /**
+   * searches for all nearby devices 
+   * by returning a list of found devices
+   */
   scan() {
     this.ble.startScan([]).subscribe(dev => {
       dev.forEach(element => {
@@ -23,6 +28,10 @@ export class BluetoothService {
 
   }
 
+  /**
+   * couples the master with the slave
+   * @param deviceId 
+   */
   connect(deviceId: string) {
 
     this.ble.connect(deviceId).subscribe(peripheralData => {
@@ -34,7 +43,12 @@ export class BluetoothService {
       });
   }
 
-
+/**
+ * reads the data sent on the bluetooth channel
+ * @param deviceid 
+ * @param serviceuuid 
+ * @param characteristicuuid 
+ */
   read(deviceid, serviceuuid, characteristicuuid) {
     // read data from a characteristic, do something with output data
     this.ble.read(deviceid, serviceuuid, characteristicuuid).then((data) => {
@@ -48,19 +62,25 @@ export class BluetoothService {
       }
     })
   }
-
+/**
+ * writes an 8-bit array indicates an integer on the bluetooth channel
+ * @param activeSensor 
+ * @param deviceId 
+ * @param serviceUUID 
+ * @param characteristicUUID 
+ */
   write(activeSensor: boolean, deviceId, serviceUUID, characteristicUUID) {
     // send 1 byte to switch a light on
     const data = new Uint8Array(1);
-    if(activeSensor){
+    if (activeSensor) {
       data[0] = 1;
-    }else{
-      data[0]=0;
+    } else {
+      data[0] = 0;
     }
-    this.ble.write(deviceId,serviceUUID,characteristicUUID,data.buffer).then(
+    this.ble.write(deviceId, serviceUUID, characteristicUUID, data.buffer).then(
       data => {
         console.log(data);
-      }, err=>{
+      }, err => {
         console.log(err)
       }
     );

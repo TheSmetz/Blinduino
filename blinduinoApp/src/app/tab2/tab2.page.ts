@@ -19,12 +19,9 @@ export class Tab2Page implements OnInit  {
 
   constructor(
     private bleService: BluetoothService,
-    private st: SuperTabs,
     private camera: Camera,
     public actionSheetController: ActionSheetController,
-    // private _DomSanitizer: DomSanitizer,
     private vision: GoogleCloudVisionServiceService,
-    private route: Router,
     public loadingController: LoadingController,
     private tts: SpeechService,
   ) { }
@@ -33,7 +30,10 @@ export class Tab2Page implements OnInit  {
    this.bleService.scan();
   }
 
-  
+  /**
+   * take a photo and 
+   * send a call to the server to analyze the photo taken
+   */
   async takePhoto() {
     this.tts.textToSpeech('Camera activated');
     const options: CameraOptions = {
@@ -53,12 +53,8 @@ export class Tab2Page implements OnInit  {
         translucent: true
         });
       await loading.present();
-
-
       const data = {image: imageData};
       const str = JSON.stringify(data)
-      
-      // tslint:disable-next-line: no-shadowed-variable
       const result = this.vision.getLabels(str).subscribe(async ( result: string ) => {
         console.log(result)
         this.tts.textToSpeech(result.toString())
@@ -74,10 +70,5 @@ export class Tab2Page implements OnInit  {
     });
     }
 
-    textToSpeech() {
-      this.tts.textToSpeech('Take a photo')
-      .then(() => console.log('Success'))
-     .catch((reason: any) => console.log(reason));
-    }
 
 }

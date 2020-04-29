@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { environment } from "../environments/environment";
 @Injectable({
   providedIn: 'root'
 })
@@ -8,6 +7,11 @@ export class GoogleCloudVisionServiceService {
 
   constructor(public http: HttpClient) { }
 
+  /**
+   * api call that allows you
+   *  to send an image and awaits a response
+   * @param base64Image 
+   */
   getLabels(base64Image) {
   const headers = new HttpHeaders()
   .append('Content-Type', 'application/json')
