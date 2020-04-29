@@ -13,7 +13,7 @@
 #include "Arduino.h"
 #include <SoftwareSerial.h>           //Library about Bluetooth
 
-
+int Incoming_value;
 bool state = false;                   //Stores the state, changed by the button (on/off)
 long timeMeasure;                     //Time measure taken from distance meter
 long distanceMeasure;                 //Distance measure taken from distance meter
@@ -42,6 +42,15 @@ void setup()
 
 void loop()
 {
+    Incoming_value = BTserial.read();                         //Read the incoming data and store it into variable Incoming_value
+    if(Incoming_value == 1)               //Checks whether value of Incoming_value is equal to 1 
+    {
+    state=true;
+    }
+    else if(Incoming_value == 0)         //Checks whether value of Incoming_value is equal to 0
+    {
+    state=false;
+    }
     if (digitalRead(buttonIn) == HIGH)  //Control the button HIGH or LOW
     {
         state = !state;                                       //Change state of Button in ON or OFF
@@ -49,7 +58,7 @@ void loop()
         BTserial.print(";");                                  //Separator
         delay(500);                                           //Delay to use the button
     }
-    if (state)    //Control the state
+    if (state)                          //Control the state
     {
         digitalWrite(distanceMeterTrigger, HIGH);             //Send a 10us pulse to the trigger
         delayMicroseconds(10);                                //Delay to wait the pulse
