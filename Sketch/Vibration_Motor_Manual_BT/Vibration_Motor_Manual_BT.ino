@@ -3,7 +3,7 @@
  * to the Smartphone. In the special case of the HC-05 the default PinCode for initiating 
  * the Coupling-Process is "1234".
  * IMPORTANT: The complete StringBluetooth has to be of the Form: state,distance; state,state,distance,distance,distance;
- * es: 1,0.5,0.6,0.7,0,1,0.4,0.3,0.2....
+ * es: HIGH;0.5,0.6,0.7,LOW;HIGH,0.4,0.3,0.2....
  * (every Value has to be seperated through a comma (',') and the message has to end with a semicolon (';')) */
 
 #define buttonIn 7                    //Switch Pin
@@ -13,7 +13,7 @@
 #include "Arduino.h"
 #include <SoftwareSerial.h>           //Library about Bluetooth
 
-
+int Incoming_value;
 bool state = false;                   //Stores the state, changed by the button (on/off)
 long timeMeasure;                     //Time measure taken from distance meter
 long distanceMeasure;                 //Distance measure taken from distance meter
@@ -42,13 +42,23 @@ void setup()
 
 void loop()
 {
+    Incoming_value = BTserial.read();                         //Read the incoming data and store it into variable Incoming_value
+    if(Incoming_value == 1)               //Checks whether value of Incoming_value is equal to 1 
+    {
+    state=true;
+    }
+    else if(Incoming_value == 0)         //Checks whether value of Incoming_value is equal to 0
+    {
+    state=false;
+    }
     if (digitalRead(buttonIn) == HIGH)  //Control the button HIGH or LOW
     {
         state = !state;                                       //Change state of Button in ON or OFF
         BTserial.print(state);                                //Print the state of the vibrator
+        BTserial.print(";");                                  //Separator
         delay(500);                                           //Delay to use the button
     }
-    if (state)    //Control the state
+    if (state)                          //Control the state
     {
         digitalWrite(distanceMeterTrigger, HIGH);             //Send a 10us pulse to the trigger
         delayMicroseconds(10);                                //Delay to wait the pulse
@@ -64,6 +74,5 @@ void loop()
             digitalWrite(vibrationOut, LOW);                  //Deactivate Vibration 
             delay(timeMeasure / 20);                          //Set up the time of Vibration based on timeMeasure (avoid 3 If cycles)
         }
-        BTserial.print(";");                                  //Separator
     }
 }

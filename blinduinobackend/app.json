@@ -1,6 +1,6 @@
 {
   "name": "Blinduino Backend",
-  "description": "A lightweight backend for Blinduino, which manages image recognition requests.",
+  "description": "A lightweight backend for Blinduino which manages image recognition requests.",
   "image": "heroku/python",
   "repository": "https://git.heroku.com/blinduinobackend.git",
   "keywords": ["python", "flask", "imageai", "tensorflow"]
