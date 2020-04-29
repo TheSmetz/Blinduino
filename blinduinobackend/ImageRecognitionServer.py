@@ -13,6 +13,9 @@ photo = 'tmp.jpeg'
 #Number of desired results (default is one, we olny care about the most likely result)
 results = 1
 
+#Updates tensorflow to latest version for maximum accuracy
+os.system('pip install tensorflow --upgrade')
+
 #Downloads datasets if not found
 if(not os.path.isfile(dataset)):
     os.mkdir('dataset')
