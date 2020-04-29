@@ -52,7 +52,7 @@ export class Tab1Page implements OnInit {
         console.log('HAAAAAAANNNNDDDD')
         if (!this.clickedFoot && !this.clickedHead) {
           this.randomHand = Math.round(((Math.random() * 4) + Number.EPSILON) * 100) / 100;
-          this.tts_service.textToSpeech(this.randomHand.toString());
+          this.tts_service.textToSpeech(this.randomHand.toString() + "metres");
           this.colorHand = this.getColor(this.randomHand);
         }
       }, 6000);
