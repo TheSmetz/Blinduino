@@ -6,18 +6,19 @@ import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 
 import { SpeechService } from '../../service/Speech/speech.service';
-import { HttpParams } from '@angular/common/http';
 import { SuperTabs } from '@ionic-super-tabs/angular';
+import { BluetoothService } from '../../service/Bluetooth/bluetooth.service';
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss']
 })
-export class Tab2Page   {
+export class Tab2Page implements OnInit  {
 
 
 
   constructor(
+    private bleService: BluetoothService,
     private st: SuperTabs,
     private camera: Camera,
     public actionSheetController: ActionSheetController,
@@ -27,6 +28,10 @@ export class Tab2Page   {
     public loadingController: LoadingController,
     private tts: SpeechService,
   ) { }
+
+  ngOnInit(): void {
+   this.bleService.scan();
+  }
 
   
   async takePhoto() {
