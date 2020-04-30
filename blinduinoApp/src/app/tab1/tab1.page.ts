@@ -1,7 +1,7 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
-import { interval } from 'rxjs';
+
 import { SpeechService } from '../../service/Speech/speech.service';
-import { DomSanitizer } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-tab1',
@@ -26,8 +26,7 @@ export class Tab1Page implements OnInit {
   timeFoot;
 
   // tslint:disable-next-line: variable-name
-  constructor(private tts_service: SpeechService,
-    private sanitizer: DomSanitizer) { }
+  constructor(private tts_service: SpeechService) { }
 
   // tslint:disable-next-line: use-lifecycle-interface
   ngOnInit() {
@@ -35,6 +34,10 @@ export class Tab1Page implements OnInit {
     this.time = setInterval(() => { this.getRandom() }, 6000)
 
   }
+  /**
+   * generates random numbers that correspond 
+   * to the distances detected by the sensors
+   */
   getRandom() {
     this.randomFoot = Math.round(((Math.random() * 4) + Number.EPSILON) * 100) / 100;
     this.colorFoot = this.getColor(this.randomFoot);
@@ -42,14 +45,16 @@ export class Tab1Page implements OnInit {
     this.colorHead = this.getColor(this.randomHead);
   }
 
-
+/**
+ * reads the manual distance sensor through a voice
+ */
   getHandSensor() {
-    console.log('HAAAAAAANNNNDDDD')
+   
     if (!this.clicked) {
       this.clicked = true;
       this.tts_service.textToSpeech('Hand Sensor');
       this.timeHand = setInterval(() => {
-        console.log('HAAAAAAANNNNDDDD')
+        
         if (!this.clickedFoot && !this.clickedHead) {
           this.randomHand = Math.round(((Math.random() * 4) + Number.EPSILON) * 100) / 100;
           this.tts_service.textToSpeech(this.randomHand.toString() + "metres");
@@ -65,6 +70,10 @@ export class Tab1Page implements OnInit {
     }
   }
 
+  /**
+   * reads the value of the automatic distance
+   *  sensor on the foot through a voice
+   */
     getDistanceFoot() {
     if (this.clicked) {
       clearInterval(this.timeHand)
@@ -88,6 +97,10 @@ export class Tab1Page implements OnInit {
 
   }
 
+  /**
+   * reads the value of the automatic distance 
+   * sensor on the head through a voice
+   */
    getDistanceHead() {
     if (this.clicked) {
       clearInterval(this.timeHand)
@@ -101,8 +114,6 @@ export class Tab1Page implements OnInit {
        this.tts_service.textToSpeech(this.randomHead.toString()+ "metres ");
 
       this.clickedHead = false;
-
-     // this.getHandSensor();
     } else {
       console.log("HEEEEAAADDD")
       this.clickedHead = true;
@@ -113,6 +124,11 @@ export class Tab1Page implements OnInit {
 
   }
 
+  /**
+   * determines the color that will correspond 
+   * to the danger of the distance from the detected object
+   * @param num 
+   */
   getColor(num) {
     if (num >= 1.00) {
       return "green"
@@ -122,12 +138,5 @@ export class Tab1Page implements OnInit {
       return "yellow"
     }
   }
-
-  // getSpeechFoot() {
-  //   this.time.subscribe(( ) => {
-  //     this.tts_service.textToSpeech(this.getSpeechFoot.toString());
-  //    });
-  // }
-
 
 }

@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SuperTabsModule } from '@ionic-super-tabs/angular';
+import { BLE } from '@ionic-native/ble/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,6 +20,7 @@ import { SuperTabsModule } from '@ionic-super-tabs/angular';
   SuperTabsModule.forRoot()],
   providers: [
     StatusBar,
+    BLE,
     TextToSpeech,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
