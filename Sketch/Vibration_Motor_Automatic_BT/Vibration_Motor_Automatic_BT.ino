@@ -13,7 +13,7 @@
 #include "Arduino.h"
 #include <SoftwareSerial.h>           //Library about Bluetooth
 
-
+float soundvelocity=0.03434;
 long timeMeasure;                     //Time measure taken from distance meter
 long distanceMeasure;                 //Distance measure taken from distance meter
 int vibrationDuration = 500;          //Duration of the vibration done by the motor
@@ -41,7 +41,7 @@ void loop() {
   delayMicroseconds(10);                                //Delay to wait the pulse
   digitalWrite(distanceMeterTrigger, LOW);              //Receive pulse
   timeMeasure = pulseIn(distanceMeterEcho, HIGH);       //Save the pulse    
-  distanceMeasure = 0.03434*timeMeasure/2;              //Convert the pulse in cm
+  distanceMeasure = soundvelocity*timeMeasure/2;        //Convert the pulse in cm
   BTserial.print(distanceMeasure);                      //Send to App measure of distance
   BTserial.print(",");                                  //Separator
   if(distanceMeasure < maxDistance) {                   //Control range of distance

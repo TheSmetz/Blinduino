@@ -2,6 +2,7 @@
 #define distanceMeterEcho 9
 #define distanceMeterTrigger 10
 
+float soundvelocity=0.03434;
 long timeMeasure; //Time measure taken from distance meter
 long distanceMeasure; //Distance measure taken from distance meter
 int vibrationDuration = 500; //Duration of the vibration done by the motor
@@ -19,7 +20,7 @@ void loop() {
   delayMicroseconds(10);
   digitalWrite(distanceMeterTrigger, LOW);
   timeMeasure = pulseIn(distanceMeterEcho, HIGH);
-  distanceMeasure = 0.03434*timeMeasure/2;
+  distanceMeasure = soundvelocity*timeMeasure/2;
 
   if(distanceMeasure < maxDistance) {
     digitalWrite(vibrationOut, HIGH);

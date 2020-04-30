@@ -3,6 +3,7 @@
 #define distanceMeterEcho 9           //DistanceMeterEcho Pin
 #define distanceMeterTrigger 10       //DistanceMeterTrigger Pin
 
+float soundvelocity=0.03434;
 bool state = false;                   //Stores the state, changed by the button (on/off)
 long timeMeasure;                     //Time measure taken from distance meter
 long distanceMeasure;                 //Distance measure taken from distance meter
@@ -41,7 +42,7 @@ void loop()
         delayMicroseconds(10);                              //Delay to wait the pulse
         digitalWrite(distanceMeterTrigger, LOW);            //Receive pulse
         timeMeasure = pulseIn(distanceMeterEcho, HIGH);     //Save the pulse
-        distanceMeasure = 0.03434 * timeMeasure / 2;        //Convert the pulse in cm
+        distanceMeasure = soundvelocity * timeMeasure / 2;        //Convert the pulse in cm
         if (distanceMeasure < maxDistance)    //Control range of distance              
         {
             digitalWrite(vibrationOut, HIGH);               //Activate Vibration
